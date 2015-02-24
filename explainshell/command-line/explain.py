@@ -28,12 +28,16 @@ def main():
                 print '├──',
             else:
                 print '└──',
-            if 'command0 simplecommandstart' == match['commandclass']:
-                print match['match'], helptext[index][0];
-            if 'command0' == match['commandclass']:
-                print helptext[index][0];
-            elif 'command0 unknown' == match['commandclass']:
-                print match['match'], '?'
+            if 'name' in match.keys():
+                print match['name']
+            else:
+                print match['match']
+            if 'helpclass' in match.keys():
+                for text, id in helptext:
+                    if id == match['helpclass']:
+                        print text
+            else:
+                print '?'
 
     except errors.ProgramDoesNotExist, e:
         logger.warn('%r missing manpage: %s', command, e.message)
