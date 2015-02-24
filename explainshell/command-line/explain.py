@@ -14,15 +14,12 @@ logger = logging.getLogger(__name__)
 def main():
     s = store.store('explainshell', config.MONGO_URI)
 
-    arguments = sys.argv
-    arguments.remove('./explain.py')
-    command = ' '.join(arguments)
-
+    command = raw_input('Enter a command: ')
+    print '\n' + command
     try:
         matches, helptext = views.explaincommand(command, s)
         logger.info('Parsing successful')
 
-        print command
         for index, match in enumerate(matches):
             if match != matches[-1]:
                 print '├──',
