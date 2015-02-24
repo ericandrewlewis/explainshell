@@ -28,10 +28,7 @@ def main():
                 print '├──',
             else:
                 print '└──',
-            if 'name' in match.keys():
-                print match['name']
-            else:
-                print match['match']
+            print match['match'], ' -- ',
             if 'helpclass' in match.keys():
                 for text, id in helptext:
                     if id == match['helpclass']:
