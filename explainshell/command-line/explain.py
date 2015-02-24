@@ -37,12 +37,15 @@ def main():
                 print '?'
 
     except errors.ProgramDoesNotExist, e:
+        print 'parsing missing manpage'
         logger.warn('%r missing manpage: %s', command, e.message)
         # return render_template('errors/missingmanpage.html', title='missing man page', e=e)
     except bashlex.errors.ParsingError, e:
+        print 'parsing error'
         logger.warn('%r parsing error: %s', command, e.message)
         # return render_template('errors/parsingerror.html', title='parsing error!', e=e)
     except NotImplementedError, e:
+        print 'not implemented error trying to explain'
         logger.warn('not implemented error trying to explain %r', command)
         # msg = ("the parser doesn't support %r constructs in the command you tried. you may "
                # "<a href='https://github.com/idank/explainshell/issues'>report a "
@@ -50,6 +53,7 @@ def main():
 
         # return render_template('errors/error.html', title='error!', message=msg)
     except:
+        print 'uncaught exception trying to explain'
         logger.error('uncaught exception trying to explain %r', command, exc_info=True)
         # msg = 'something went wrong... this was logged and will be checked'
         # return render_template('errors/error.html', title='error!', message=msg)
